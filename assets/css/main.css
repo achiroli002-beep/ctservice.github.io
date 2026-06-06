@@ -1537,6 +1537,12 @@ h1, h2, h3, h4, h5, h6 {
 
   .cta-banner { flex-direction: column; }
   .cta-banner-actions { width: 100%; }
+
+  /* Sticky sidebars only make sense in 2-col layout; disable on mobile */
+  .grid-aside > [style*="sticky"],
+  .grid-aside-r > [style*="sticky"] {
+    position: static !important;
+  }
 }
 
 @media (max-width: 640px) {

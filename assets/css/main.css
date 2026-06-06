@@ -142,6 +142,13 @@ h1, h2, h3, h4, h5, h6 {
 .grid-aside { display: grid; grid-template-columns: 2fr 3fr; gap: clamp(2rem, 6vw, 7rem); align-items: start; }
 .grid-aside-r { display: grid; grid-template-columns: 3fr 2fr; gap: clamp(2rem, 6vw, 7rem); align-items: start; }
 
+/* Sidebar sticky — controlled via class so media queries can override without !important */
+.sticky-aside {
+  position: sticky;
+  top: calc(80px + var(--s-8));
+  align-self: start;
+}
+
 /* -----------------------------------------------
    04. TYPOGRAPHY UTILITIES
 ----------------------------------------------- */
@@ -1538,10 +1545,20 @@ h1, h2, h3, h4, h5, h6 {
   .cta-banner { flex-direction: column; }
   .cta-banner-actions { width: 100%; }
 
-  /* Sticky sidebars only make sense in 2-col layout; disable on mobile */
-  .grid-aside > [style*="sticky"],
-  .grid-aside-r > [style*="sticky"] {
-    position: static !important;
+  /* Sticky sidebar: disable in single-column layout */
+  .sticky-aside {
+    position: relative;
+    top: auto;
+    align-self: auto;
+  }
+
+  /* data-reveal: on single-column mobile remove translateX/Y shifts.
+     Stacked elements shifted 20px down visually overlap the sibling below;
+     fade-only reveal is cleaner and avoids horizontal clipping. */
+  [data-reveal],
+  [data-reveal="left"],
+  [data-reveal="right"] {
+    transform: none;
   }
 }
 
